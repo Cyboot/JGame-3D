@@ -32,7 +32,6 @@ public class Test3DCanvas extends Canvas implements Runnable {
 		this.addMouseListener(ControlListener.c);
 		this.addMouseMotionListener(ControlListener.c);
 
-		//Initialisierung
 		ImageLoader.init();
 	}
 
@@ -93,13 +92,13 @@ public class Test3DCanvas extends Canvas implements Runnable {
 	private void renderDebug(Graphics g) {
 		g.setColor(Color.red);
 		g.setFont(getFont());
-		g.drawString("FPS: " + currentFPS, WIDTH - 50, 20);
+		g.drawString("FPS: " + currentFPS, WIDTH - 80, 20);
 		
 		g.setColor(Color.white);
 		g.drawString(Player.p.getEyepos().toString(), 5, 15);
 		
 		DecimalFormat df = new DecimalFormat("#000.000");
-		g.drawString(df.format(Player.p.getScreencanvas().getAngle())+"°", 5, 35);
+		g.drawString(df.format(Player.p.getScreencanvas().getAngle())+"Â°", 5, 35);
 		
 	}
 

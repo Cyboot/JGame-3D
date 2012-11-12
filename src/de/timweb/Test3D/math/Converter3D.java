@@ -65,9 +65,6 @@ public class Converter3D {
 
 		intersect.x += Test3DCanvas.WIDTH / 2 - midSceencanvas.x;
 		intersect.y = Test3DCanvas.HEIGHT / 2 - intersect.y - midSceencanvas.y;
-		// intersect.x += Test3DCanvas.WIDTH / 2 - Player.p.getEyepos().x;
-		// intersect.y = Test3DCanvas.HEIGHT / 2 - intersect.y
-		// - Player.p.getEyepos().y;
 
 		//
 		return new Point((int) (dx + Test3DCanvas.WIDTH / 2),
@@ -95,7 +92,6 @@ public class Converter3D {
 		Vector3d intersect = Player.p.getScreencanvas().intersect(
 				Line3D.getByTwoPoints(point1, point2));
 
-		// System.out.println(pointOnScreen.x() + "\t" + pointOnScreen.y());
 		return getPoint(intersect);
 	}
 

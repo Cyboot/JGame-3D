@@ -11,10 +11,13 @@ public class Controls {
 	public boolean backward = false;
 	public boolean left = false;
 	public boolean rigth = false;
-	public boolean sprint = false;
+	public Player.SPEED speed = Player.SPEED.DEFAULT;
+	public boolean rotateLeft;
+	public boolean rotateRight;
 
 	private volatile int dx;
 	private volatile int dy;
+
 
 	public synchronized void update(int delta) {
 		handleKeys(delta);
@@ -33,8 +36,15 @@ public class Controls {
 	}
 
 	private void handleKeys(int delta) {
-		Player.p.setSprint(sprint);
+		Player.p.setSpeed(speed);
 
+		if(rotateRight){
+			Player.p.rotate(delta* 0.1,0);
+		}
+		if(rotateLeft){
+			Player.p.rotate(delta* -0.1,0);
+		}
+		
 		if (forward) {
 			Player.p.moveForward(delta, true);
 		}

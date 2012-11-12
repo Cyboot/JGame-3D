@@ -20,23 +20,32 @@ public class ControlListener implements MouseListener,KeyListener,MouseMotionLis
 	public void keyPressed(KeyEvent e) {
 		switch (e.getKeyCode()) {
 		case KeyEvent.VK_W:
-		case KeyEvent.VK_UP:
 			Controls.c.forward = true;
 			break;
-		case KeyEvent.VK_S:
-		case KeyEvent.VK_DOWN:
-			Controls.c.backward = true;
-			break;
 		case KeyEvent.VK_A:
-		case KeyEvent.VK_LEFT:
 			Controls.c.left = true;
 			break;
+		case KeyEvent.VK_S:
+			Controls.c.backward = true;
+			break;
 		case KeyEvent.VK_D:
-		case KeyEvent.VK_RIGHT:
 			Controls.c.rigth = true;
 			break;
+		case KeyEvent.VK_UP:
+			break;
+		case KeyEvent.VK_DOWN:
+			break;
+		case KeyEvent.VK_LEFT:
+			Controls.c.rotateLeft = true;
+			break;
+		case KeyEvent.VK_RIGHT:
+			Controls.c.rotateRight = true;
+			break;
 		case KeyEvent.VK_SHIFT:
-			Controls.c.sprint = true;
+			Controls.c.speed = Player.SPEED.FAST;
+			break;
+		case KeyEvent.VK_CONTROL:
+			Controls.c.speed = Player.SPEED.SLOW;
 			break;
 		}
 	}
@@ -45,23 +54,32 @@ public class ControlListener implements MouseListener,KeyListener,MouseMotionLis
 	public void keyReleased(KeyEvent e) {
 		switch (e.getKeyCode()) {
 		case KeyEvent.VK_W:
-		case KeyEvent.VK_UP:
 			Controls.c.forward = false;
 			break;
-		case KeyEvent.VK_S:
-		case KeyEvent.VK_DOWN:
-			Controls.c.backward = false;
-			break;
 		case KeyEvent.VK_A:
-		case KeyEvent.VK_LEFT:
 			Controls.c.left = false;
 			break;
+		case KeyEvent.VK_S:
+			Controls.c.backward = false;
+			break;
 		case KeyEvent.VK_D:
-		case KeyEvent.VK_RIGHT:
 			Controls.c.rigth = false;
 			break;
+		case KeyEvent.VK_UP:
+			break;
+		case KeyEvent.VK_DOWN:
+			break;
+		case KeyEvent.VK_LEFT:
+			Controls.c.rotateLeft = false;
+			break;
+		case KeyEvent.VK_RIGHT:
+			Controls.c.rotateRight = false;
+			break;
 		case KeyEvent.VK_SHIFT:
-			Controls.c.sprint = false;
+			Controls.c.speed = Player.SPEED.DEFAULT;
+			break;
+		case KeyEvent.VK_CONTROL:
+			Controls.c.speed = Player.SPEED.DEFAULT;
 			break;
 		case KeyEvent.VK_ESCAPE:
 			if(isMouseGrabbed){

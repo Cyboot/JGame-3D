@@ -19,9 +19,11 @@ public class World {
 	Cube3D cube0 = new Cube3D(new Vector3d(-1000, -500, 1000), 1000);
 	Cube3D cube1 = new Cube3D(new Vector3d(1000, -500, 1000), 1000);
 	private Raster3D raster3d;
+	private Raster3D raster3d2;
 
 	private World() {
 		raster3d = new Raster3D(new Vector3d(0, -200, 0), 10, 100);
+		raster3d2 = new Raster3D(new Vector3d(0, 800, 0), 10, 100);
 	}
 
 	public void update(int delta) {
@@ -31,6 +33,7 @@ public class World {
 	public void render(Graphics g) {
 		g.setColor(Color.DARK_GRAY);
 		raster3d.render(g);
+		raster3d2.render(g);
 
 		g.setColor(Color.green);
 		Vector3d point3 = new Vector3d(0, 0, 1000);
@@ -55,10 +58,10 @@ public class World {
 
 		// g.setColor(Color.green);
 		// Graphics3D.drawPoint3D(new Vector3d(100,0,100), g);
-		for (int i = 0; i < 3000; i++)
+		for (int i = 0; i < 1; i++)
 			cube0.render(g);
 		// //
-		// cube1.render(g);
+		 cube1.render(g);
 
 		// Vector3d intersect =
 		// Player.p.getScreencanvas().intersect(Line3D.getByTwoPoints(point,

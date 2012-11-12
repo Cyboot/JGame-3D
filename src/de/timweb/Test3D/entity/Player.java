@@ -9,13 +9,24 @@ import de.timweb.Test3D.math.VectorUtils;
 
 public class Player extends Entity {
 	public static final int DISTANCE_TO_SCREEN = 20;
-	public static final double DEFAULTSPEED =  0.1;
-	
+	public static final double DEFAULTSPEED = 0.1;
+
 	public static final Player p = new Player();
 
 	private double speed = DEFAULTSPEED;
-
 	private Plane3D screencanvas;
+
+	public enum SPEED {
+		SLOW(0.25), DEFAULT(1), FAST(4);
+		double value;
+
+		private SPEED(double value) {
+			this.value = value;
+		}
+		public double getValue() {
+			return value;
+		}
+	}
 
 	private Player() {
 		super(new Vector3d(0, 0, -DISTANCE_TO_SCREEN));
@@ -42,14 +53,14 @@ public class Player extends Entity {
 	 */
 	public void rotate(double leftright, double updown) {
 		if (leftright != 0) {
-			screencanvas.rotate(Player.p.getEyepos(),leftright);
-			
+			screencanvas.rotate(Player.p.getEyepos(), leftright);
+
 		}
 		if (updown != 0) {
-//			screencanvas.getNormalVector().set(
-//					VectorUtils.mulitply(Matrix3D.getRotationMatrix(
-//							Math.toRadians(updown), Matrix3D.AXIS_X),
-//							screencanvas.getNormalVector()));
+			// screencanvas.getNormalVector().set(
+			// VectorUtils.mulitply(Matrix3D.getRotationMatrix(
+			// Math.toRadians(updown), Matrix3D.AXIS_X),
+			// screencanvas.getNormalVector()));
 		}
 
 	}
@@ -88,17 +99,15 @@ public class Player extends Entity {
 
 	public void moveSide(int delta, boolean toRight) {
 		int opposite = toRight ? -1 : 1;
-		
+
 		double add = delta * speed * opposite;
-		Vector3d move = Vector3d.crossProduct(screencanvas.getNormalVector(), Vector3d.AXIS_Y);
+		Vector3d move = Vector3d.crossProduct(screencanvas.getNormalVector(),
+				Vector3d.AXIS_Y);
 		pos.add(move.x * add, move.y * add, move.z * add);
 	}
 
-	public void setSprint(boolean sprint) {
-		if(sprint)
-			speed = DEFAULTSPEED *2;
-		else
-			speed = DEFAULTSPEED;
+	public void setSpeed(SPEED speed) {
+			this.speed = DEFAULTSPEED * speed.getValue();
 	}
 
 }
