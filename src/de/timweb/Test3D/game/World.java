@@ -3,10 +3,7 @@ package de.timweb.Test3D.game;
 import java.awt.Color;
 import java.awt.Graphics;
 
-import de.timweb.Test3D.entity.Player;
 import de.timweb.Test3D.graphics.Graphics3D;
-import de.timweb.Test3D.math.Converter3D;
-import de.timweb.Test3D.math.Line3D;
 import de.timweb.Test3D.math.Vector3d;
 import de.timweb.Test3D.shape.Cube3D;
 import de.timweb.Test3D.shape.Raster3D;
@@ -47,7 +44,7 @@ public class World {
 		Vector3d point2 = new Vector3d(0, 200, 1000);
 		Graphics3D.drawPoint3D(point2, g);
 
-		System.out.println(Player.p.getScreencanvas());
+//		System.out.println(Player.p.getScreencanvas());
 
 		// g.setColor(Color.red);
 		// Graphics3D.drawLine3D(new Vector3d(-500,-200,0), new
