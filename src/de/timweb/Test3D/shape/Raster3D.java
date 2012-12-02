@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import de.timweb.Test3D.graphics.Renderable;
 import de.timweb.Test3D.math.Vector3d;
+import de.timweb.Test3D.util.Axis;
 
 /**
  * A Raster (LineCount x LineCount Lines) around a point
@@ -23,39 +24,88 @@ public class Raster3D extends Shape3D implements Renderable {
 	 * @param distance
 	 *            Distance between the lines
 	 */
-	public Raster3D(Vector3d origin, int linecount, int distance) {
-		final int MAXLENGTH = linecount*distance;
-		for (int i = -linecount/2; i <= linecount/2; i++) {
-			Vector3d start = new Vector3d(origin.x+i*distance, origin.y, origin.z-MAXLENGTH/2);
-			Vector3d end = start.copy().add(0, 0, MAXLENGTH);
-			
-			cross.add(new Path3D(start,end));
+	public Raster3D(Axis axis, Vector3d origin, int linecount, int distance) {
+		final int MAXLENGTH = linecount * distance;
+
+		// FIXME: really ugly, use the Vector inside 'axis'
+		switch (axis) {
+		case X:
+			for (int i = -linecount / 2; i <= linecount / 2; i++) {
+				Vector3d start = new Vector3d(origin.x + i * distance, origin.y
+						- MAXLENGTH / 2, origin.z);
+				Vector3d end = start.copy().add(0, MAXLENGTH, 0);
+
+				cross.add(new Path3D(start, end));
+			}
+
+			System.out.println();
+			for (int i = -linecount / 2; i <= linecount / 2; i++) {
+				Vector3d start = new Vector3d(origin.x - MAXLENGTH / 2,
+						origin.y + i * distance, origin.z);
+				Vector3d end = start.copy().add(MAXLENGTH, 0, 0);
+
+				line.add(new Path3D(start, end));
+			}
+
+			break;
+		case Y:
+			for (int i = -linecount / 2; i <= linecount / 2; i++) {
+				Vector3d start = new Vector3d(origin.x, origin.y - MAXLENGTH
+						/ 2, origin.z + i * distance);
+				Vector3d end = start.copy().add(0, MAXLENGTH, 0);
+
+				cross.add(new Path3D(start, end));
+			}
+
+			System.out.println();
+			for (int i = -linecount / 2; i <= linecount / 2; i++) {
+				Vector3d start = new Vector3d(origin.x,
+						origin.y + i * distance, origin.z - MAXLENGTH / 2);
+				Vector3d end = start.copy().add(0, 0, MAXLENGTH);
+
+				line.add(new Path3D(start, end));
+			}
+			break;
+		case Z:
+
+			for (int i = -linecount / 2; i <= linecount / 2; i++) {
+				Vector3d start = new Vector3d(origin.x + i * distance,
+						origin.y, origin.z - MAXLENGTH / 2);
+				Vector3d end = start.copy().add(0, 0, MAXLENGTH);
+
+				cross.add(new Path3D(start, end));
+			}
+
+			System.out.println();
+			for (int i = -linecount / 2; i <= linecount / 2; i++) {
+				Vector3d start = new Vector3d(origin.x - MAXLENGTH / 2,
+						origin.y, origin.z + i * distance);
+				Vector3d end = start.copy().add(MAXLENGTH, 0, 0);
+
+				line.add(new Path3D(start, end));
+			}
+			break;
+		default:
+			break;
 		}
 
-		System.out.println();
-		for (int i = -linecount/2; i <= linecount/2; i++) {
-			Vector3d start = new Vector3d(origin.x-MAXLENGTH/2, origin.y, origin.z+i*distance);
-			Vector3d end = start.copy().add(MAXLENGTH, 0, 0);
-			
-			cross.add(new Path3D(start,end));
-		}
 	}
 
 	@Override
 	public void render(Graphics g) {
-		for(Path3D p:line)
+		for (Path3D p : line)
 			p.render(g);
-		for(Path3D p:cross)
+		for (Path3D p : cross)
 			p.render(g);
 
 	}
 
 	@Override
 	public void move(double x, double y, double z) {
-		for(Path3D p:line)
+		for (Path3D p : line)
 			p.move(x, y, z);
-		for(Path3D p:cross)
+		for (Path3D p : cross)
 			p.move(x, y, z);
 	}
-	
+
 }

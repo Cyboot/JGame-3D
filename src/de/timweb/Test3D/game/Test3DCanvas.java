@@ -98,7 +98,7 @@ public class Test3DCanvas extends Canvas implements Runnable {
 		g.drawString(Player.p.getEyepos().toString(), 5, 15);
 		
 		DecimalFormat df = new DecimalFormat("#000.000");
-		g.drawString(df.format(Player.p.getScreencanvas().getAngle())+"Â°", 5, 35);
+		g.drawString(df.format(Player.p.getScreencanvas().getAngle())+"°", 5, 35);
 		
 	}
 
